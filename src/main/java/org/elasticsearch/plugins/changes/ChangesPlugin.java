@@ -22,23 +22,24 @@ import java.util.Collections;
 import org.elasticsearch.common.inject.Module;
 import org.elasticsearch.common.logging.ESLogger;
 import org.elasticsearch.common.logging.Loggers;
-import org.elasticsearch.plugins.AbstractPlugin;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.changes.module.ChangesModule;
 
-public class ChangesPlugin extends AbstractPlugin {
+public class ChangesPlugin extends Plugin {
     private static final ESLogger LOG = Loggers.getLogger(ChangesPlugin.class);
-    private final Collection<Class<? extends Module>> modules;
+    private final Collection<Module> modules;
     
-    public ChangesPlugin() {
+    public ChangesPlugin(Settings settings) {
         LOG.info("Starting ChangesPlugin");
         
-        Collection<Class<? extends Module>> tempList=new ArrayList<Class<? extends Module>>(1);
-        tempList.add(ChangesModule.class);
+        Collection<Module> tempList=new ArrayList<Module>(1);
+        tempList.add(new ChangesModule());
         modules=Collections.unmodifiableCollection(tempList);
     }
     
     @Override
-    public Collection<Class<? extends Module>> modules() {
+    public Collection<Module> nodeModules() {
         return modules;
     }
 

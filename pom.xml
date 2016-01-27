@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 	<description>ElasticSearch - Changes Plugin</description>
 	<inceptionYear>2012</inceptionYear>
-	<url>http://derryx.github.com/elasticsearch-changes-plugin/</url>
+	<url>http://github.com/diamondio</url>
 
 	<repositories>
 
@@ -47,6 +47,14 @@
 				<role>developer</role>
 			</roles>
 		</developer>
+		<developer>
+			<id>diamondio</id>
+			<name>Diamond Inc</name>
+			<roles>
+				<role>committer</role>
+				<role>developer</role>
+			</roles>
+		</developer>
 	</developers>
 	<contributors>
 		<contributor>
@@ -59,7 +67,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<elasticsearch.version>1.7.3</elasticsearch.version>
+		<elasticsearch.version>2.1.1</elasticsearch.version>
 	</properties>
 
 	<licenses>
@@ -71,13 +79,13 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git@github.com/derryx/elasticsearch-changes-plugin.git</connection>
-		<developerConnection>scm:git:git@github.com/derryx/elasticsearch-changes-plugin.git</developerConnection>
-		<url>http://github.com/derryx/elasticsearch-changes-plugin</url>
+		<connection>scm:git:git@github.com/diamondio/elasticsearch-changes-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com/diamondio/elasticsearch-changes-plugin.git</developerConnection>
+		<url>http://github.com/diamondio/elasticsearch-changes-plugin</url>
 	</scm>
 
 	<issueManagement>
-		<url>http://github.com/derryx/elasticsearch-changes-plugin/issues</url>
+		<url>http://github.com/diamondio/elasticsearch-changes-plugin/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 

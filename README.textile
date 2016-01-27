@@ -5,7 +5,7 @@ through a REST service. It provides information on node basis. So if you want th
 
 h2. Installation
 
-Run @bin/plugin -install derryx/elasticsearch-changes-plugin@
+Run @bin/plugin -install diamondio/elasticsearch-changes-plugin@
 
 h2. Configuration
 
@@ -63,6 +63,7 @@ h4. Version mapping
 * Change Plugin 0.2.x -> Elasticsearch 0.19.x
 * Change Plugin 0.3.x -> Elasticsearch 1.0.x
 * Change Plugin 0.4.x -> Elasticsearch 1.7.x
+* Change Plugin 0.5.x -> Elasticsearch 2.1.1
 
 h2. Other information
 
