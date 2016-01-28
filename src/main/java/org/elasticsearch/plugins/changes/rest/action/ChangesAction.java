@@ -20,12 +20,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.lucene.index.IndexableField;
 import org.elasticsearch.index.mapper.ParseContext.Document;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.Strings;
@@ -141,6 +141,27 @@ public class ChangesAction extends BaseRestHandler {
         }
     }
 
+    private void buildObject(XContentBuilder builder, JSONObject jObject, String objectKey) throws IOException {
+        if (objectKey != null) builder.startObject(objectKey);
+        else builder.startObject();
+
+        Iterator<?> keys = jObject.keys();
+        while (keys.hasNext()) {
+            String key = (String)keys.next();
+            if (jObject.get(key) instanceof JSONObject) {
+                buildObject(builder, jObject.getJSONObject(key), key);
+            } else if (jObject.get(key) instanceof Double) {
+                builder.field(key, jObject.getDouble(key));
+            } else if (jObject.get(key) instanceof Integer) {
+                builder.field(key, jObject.getInt(key));
+            } else if (jObject.get(key) instanceof String) {
+                builder.field(key, jObject.getString(key));
+            }
+        }
+
+        builder.endObject();
+    }
+
     private XContentBuilder createXContentBuilderForChanges(final RestRequest request, List<String> indices) throws IOException {
         XContentBuilder builder = XContentFactory.contentBuilder(XContentType.JSON);
         try {
@@ -165,7 +186,7 @@ public class ChangesAction extends BaseRestHandler {
                         builder.field("timestamp", change.getTimestamp());
                         builder.field("version", change.getVersion());
 
-                        JSONArray sources = new JSONArray();
+                        builder.startArray("sources");
                         for (Document doc : change.getDocs()) {
                             JSONObject source = new JSONObject();
                             List<IndexableField> fields = doc.getFields();
@@ -177,9 +198,9 @@ public class ChangesAction extends BaseRestHandler {
                                 }
                             }
 
-                            sources.put(source);
+                            buildObject(builder, source, null);
                         }
-                        builder.field("_sources", sources);
+                        builder.endArray();
 
                         builder.endObject();
                     }
