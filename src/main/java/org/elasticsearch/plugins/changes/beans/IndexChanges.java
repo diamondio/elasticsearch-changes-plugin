@@ -118,6 +118,7 @@ public class IndexChanges extends IndexingOperationListener {
         change.type=Type.INDEX;
         change.version=index.version();
         change.timestamp=System.currentTimeMillis();
+        change.docs=index.docs();
         
         addChange(change);        
     }

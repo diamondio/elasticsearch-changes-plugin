@@ -15,11 +15,15 @@
  */
 package org.elasticsearch.plugins.changes.beans;
 
+import java.util.List;
+import org.elasticsearch.index.mapper.ParseContext.Document;
+
 public class Change implements Comparable<Change> {
     long timestamp;
     Type type;
     String id;
     long version;
+    java.util.List<Document> docs;
     
     public long getTimestamp() {
         return timestamp;
@@ -51,6 +55,14 @@ public class Change implements Comparable<Change> {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    public java.util.List<Document> getDocs() {
+        return docs;
+    }
+
+    public void setDocs(java.util.List<Document> docs) {
+        this.docs = docs;
     }
 
     public enum Type {
